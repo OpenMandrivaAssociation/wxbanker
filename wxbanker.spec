@@ -6,7 +6,7 @@ License:	GNU GPL 3
 Group:		Office
 URL:		https://launchpad.net/wxbanker
 Source0:	http://launchpad.net/wxbanker/0.8/0.8.2/+download/%{name}-%{version}.tar.xz
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
 BuildRequires:	python-devel
 BuildRequires:	wxPythonGTK
 BuildRequires:  python-dateutil
@@ -27,16 +27,13 @@ You can also create arbitrary accounts for keeping track of reimbursable deposit
 python setup.py build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-python setup.py install --root=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+python setup.py install --root=%{buildroot}
 
-%clean
-rm -rf $RPM_BUILD_ROOT
+%find_lang %{name}
 
-%files
-%defattr(-,root,root)
+%files -f %{name}.lang
 %doc README.txt COPYING.txt CHANGELOG.txt
-%_localedir/*/LC_MESSAGES/%{name}.mo
 %_datadir/icons/hicolor/*/apps/%{name}.png
 %_datadir/%{name}/*
 %_datadir/pixmaps/%{name}.png
