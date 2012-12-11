@@ -6,7 +6,7 @@ License:	GNU GPL 3
 Group:		Office
 URL:		https://launchpad.net/wxbanker
 Source0:	http://launchpad.net/wxbanker/0.8/0.8.2/+download/%{name}-%{version}.tar.xz
-
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	python-devel
 BuildRequires:	wxPythonGTK
 BuildRequires:  python-dateutil
@@ -27,13 +27,16 @@ You can also create arbitrary accounts for keeping track of reimbursable deposit
 python setup.py build
 
 %install
-rm -rf %{buildroot}
-python setup.py install --root=%{buildroot}
+rm -rf $RPM_BUILD_ROOT
+python setup.py install --root=$RPM_BUILD_ROOT
 
-%find_lang %{name}
+%clean
+rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files
+%defattr(-,root,root)
 %doc README.txt COPYING.txt CHANGELOG.txt
+%_localedir/*/LC_MESSAGES/%{name}.mo
 %_datadir/icons/hicolor/*/apps/%{name}.png
 %_datadir/%{name}/*
 %_datadir/pixmaps/%{name}.png
@@ -41,4 +44,12 @@ python setup.py install --root=%{buildroot}
 %_bindir/%{name}
 %py_puresitedir/%{name}/*
 %py_puresitedir/wxBanker*.egg-info
+
+
+
+%changelog
+* Tue Nov 08 2011 Jon Dill <dillj@mandriva.org> 0.8.2-1mdv2012.0
++ Revision: 729127
+- import wxbanker 0.8.2
+- create wxbanker
 
