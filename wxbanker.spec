@@ -1,7 +1,7 @@
 Summary: 	Simple personal finance
 Name: 		wxbanker
 Version:	0.8.2
-Release:	2
+Release:	3
 License:	GNU GPL 3
 Group:		Office
 URL:		https://launchpad.net/wxbanker
